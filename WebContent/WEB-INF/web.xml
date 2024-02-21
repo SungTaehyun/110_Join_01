@@ -1,12 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+ xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" 
+ id="WebApp_ID" version="4.0">
   <display-name>110_Join_01</display-name>
-  <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-    <welcome-file>index.htm</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.htm</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
-  </welcome-file-list>
+  
+  <!-- Spring configuration start -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath*:/applicationContext*.xml</param-value>
+	</context-param>
+	<!-- Spring configuration end -->
+  
+<!-- Spring servlet start -->
+	<servlet>
+		<servlet-name>spring-mvc</servlet-name> <!-- 서블릿 이름 정의 여기서는 spring으로 지정 -->
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<!--서블릿 클래스의 경로를 지정-->
+		<load-on-startup>1</load-on-startup>
+		<!-- 서블릿이 웹 애플리케이션 시작 시 로드외어야 하는지 여부를 지정, 일반적으로 1로 설정-->
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>spring-mvc</servlet-name><!--  매핑할 서블릿의 이름을 지정-->
+		
+		<!-- *.do"로 설정되어 있어 확장자가 ".do"로 끝나는 모든 요청이 DispatcherServlet에 의해 처리-->
+		<url-pattern>/</url-pattern><!-- 매핑될 URL 패턴을 지정-->
+	</servlet-mapping>
+
+	<!-- Spring servlet end -->
+	<welcome-file-list>
+		<welcome-file>login.jsp</welcome-file>
+	</welcome-file-list>
 </web-app>
